@@ -16,7 +16,24 @@ app.get('/notes', (req, res) => {
 
 /*== DELETE API /notes/1 ==*/
 app.delete('/notes/:id', (req, res) => {
-    
+    const index = parseInt(req.params.id)
+    if (index < 0 || index >= notes.length) {
+        return res.status(404).json({ message: '😵‍💫 Note not found' })
+    }
+    notes.splice(index, 1)
+    res.status(200).json({ message: '🧹 Note deleted successfully.' })
+})
+
+/*== UPDATE API /notes/1 ==*/
+app.patch('/notes/:id', (req, res) => {
+    const index = req.params.id
+    const title = req.body.title
+    const desc = req.body.description
+
+    notes[index].title = title
+    notes[index].description = desc
+
+    res.status(200).json({ message: '✅ Note updated successfully', note: notes[index] })
 })
 
 app.listen(3000, () => {
