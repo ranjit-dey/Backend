@@ -4,7 +4,7 @@ const { users } = require('./db/schema.js')
 const insertToDB = async () => {
     await connectDB
         .insert(users)
-        .values({ name: 'Ranjit', age: '43', email: 'ranjitdey05265@gmail.com' })
+        .values({ name: 'Ranjit', age: '43', email: 'ranjitdey05265@gmail.com' },)
 }
 
 const deleteTable = async () => {
